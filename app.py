@@ -5,8 +5,11 @@ from tronpy import Tron
 from pydantic import BaseModel
 from typing import List
 from tronpy import Tron
+from tronpy.providers import HTTPProvider
 
-tron = Tron()
+api_keys = ["661a0379-4588-4708-9e6a-21c0d3cf06e2"]
+provider = HTTPProvider(api_key=api_keys[0])
+tron = Tron(provider)
 print(dir(tron)) 
 
 app = FastAPI()
@@ -36,7 +39,6 @@ def get_db():
 
 @app.post("/wallet_info/")
 async def get_wallet_info(wallet: WalletInfo, db: Session = Depends(get_db)):
-    tron = Tron()
     try:
         account = tron.get_account(wallet.address)
         

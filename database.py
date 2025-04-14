@@ -18,3 +18,4 @@ class WalletRequest(Base):
     balance = Column(Float)
 
 Base.metadata.create_all(bind=engine)
+
